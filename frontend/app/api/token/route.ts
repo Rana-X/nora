@@ -1,4 +1,4 @@
-import { AccessToken } from "livekit-server-sdk";
+import { AccessToken, RoomAgentDispatch, RoomConfiguration } from "livekit-server-sdk";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Create access token with permissions
-    // The agent with WorkerType.ROOM will auto-join when participant connects
     const at = new AccessToken(apiKey, apiSecret, {
       identity: participantName,
       ttl: "1h",
@@ -36,6 +35,15 @@ export async function POST(request: NextRequest) {
       canPublish: true,
       canPublishData: true,
       canSubscribe: true,
+    });
+
+    // Explicitly dispatch the named agent to the room
+    at.roomConfig = new RoomConfiguration({
+      agents: [
+        new RoomAgentDispatch({
+          agentName: "nora-voice-agent",
+        }),
+      ],
     });
 
     const token = await at.toJwt();
