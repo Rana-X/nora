@@ -76,68 +76,33 @@ export default function Home() {
     );
   }
 
-  // Landing page with join button
+  // Landing page - minimal
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900">
-      <div className="text-center">
-        {/* Logo/Title */}
-        <h1 className="text-5xl font-bold text-white mb-4">Nora</h1>
-        <p className="text-gray-400 mb-8 max-w-md">
-          AI Voice Agent with realistic avatar. Click below to start a conversation.
-        </p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black">
+      {/* NORA title in sky blue */}
+      <h1 className="text-7xl md:text-8xl font-bold text-sky-400 tracking-wider mb-16">
+        NORA
+      </h1>
 
-        {/* Error message */}
-        {error && (
-          <div className="mb-4 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200">
-            {error}
-          </div>
-        )}
-
-        {/* Join button */}
-        <button
-          onClick={joinRoom}
-          disabled={isConnecting}
-          className={`px-8 py-4 text-lg font-semibold rounded-full transition-all ${
-            isConnecting
-              ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 text-white hover:scale-105"
-          }`}
-        >
-          {isConnecting ? (
-            <span className="flex items-center gap-2">
-              <svg
-                className="animate-spin h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              Connecting...
-            </span>
-          ) : (
-            "Start Conversation"
-          )}
-        </button>
-
-        {/* Instructions */}
-        <div className="mt-12 text-sm text-gray-500">
-          <p>Make sure your microphone is enabled.</p>
-          <p className="mt-1">The AI agent will join automatically.</p>
+      {/* Error message */}
+      {error && (
+        <div className="mb-8 px-4 py-2 text-red-400 text-sm">
+          {error}
         </div>
-      </div>
+      )}
+
+      {/* Start button */}
+      <button
+        onClick={joinRoom}
+        disabled={isConnecting}
+        className={`px-12 py-4 text-xl font-medium rounded-full transition-all duration-300 ${
+          isConnecting
+            ? "text-white/30 cursor-not-allowed"
+            : "text-sky-400 hover:text-sky-300 hover:bg-sky-400/10 border border-sky-400/30 hover:border-sky-400/50"
+        }`}
+      >
+        {isConnecting ? "Connecting..." : "Start"}
+      </button>
     </div>
   );
 }
