@@ -5,4 +5,5 @@ livekit-plugins-deepgram~=1.0
 livekit-plugins-cartesia~=1.0
 livekit-plugins-silero~=1.0
 python-dotenv~=1.0
+requests~=2.31
 orgo
